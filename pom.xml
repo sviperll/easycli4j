@@ -3,7 +3,7 @@
 
   <groupId>com.github.sviperll</groupId>
   <artifactId>sviperll-cli</artifactId>
-  <version>0.3-SNAPSHOT</version>
+  <version>0.4-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>sviperll-cli</name>
@@ -71,7 +71,7 @@
     <dependency>
       <groupId>com.github.sviperll</groupId>
       <artifactId>sviperll-common</artifactId>
-      <version>0.7</version>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 </project>
