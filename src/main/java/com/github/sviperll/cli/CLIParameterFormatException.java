@@ -26,6 +26,7 @@
  */
 package com.github.sviperll.cli;
 
+@SuppressWarnings("serial")
 public class CLIParameterFormatException extends Exception {
     public CLIParameterFormatException(String message) {
         super(message);
