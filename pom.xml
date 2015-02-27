@@ -8,7 +8,7 @@
     <groupId>com.github.sviperll</groupId>
     <artifactId>easycli4j</artifactId>
     <name>easycli4j</name>
-    <version>0.17-SNAPSHOT</version>
+    <version>0.17</version>
     <packaging>jar</packaging>
     <url>https://github.com/sviperll/easycli4j</url>
     <properties>
@@ -18,7 +18,7 @@
         <connection>scm:git:git://github.com/sviperll/easycli4j.git</connection>
         <developerConnection>scm:git:git@github.com:sviperll/easycli4j.git</developerConnection>
         <url>https://github.com/sviperll/easycli4j</url>
-        <tag>HEAD</tag>
+        <tag>easycli4j-0.17</tag>
     </scm>
     <licenses>
         <license>
