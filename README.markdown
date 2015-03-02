@@ -15,37 +15,25 @@ Usage
 
 ### Maven ###
 
-    <dependencies>
-
-        <!-- ... -->
-
         <dependency>
             <groupId>com.github.sviperll</groupId>
             <artifactId>easycli4j</artifactId>
-            <version>0.17</version>
+            <version>0.18</version>
         </dependency>
 
-        <!-- ... -->
+Changelog
+---------
 
-    </dependencies>
+Since 0.18
 
-### Gradle ###
-
-    dependencies {
-
-        // ...
-
-        compile(group: 'com.github.sviperll', name: 'easycli4j', version: '0.17')
-
-        // ...
-
-    }
+ * Switch to chicory version 0.18.
 
 Example
 -------
 
 Here is a full Hello world example
 
+```java
     class Hello {
 
         public static void main(String[] args) {
@@ -77,6 +65,7 @@ Here is a full Hello world example
         }
 
     }
+```
 
 When you compile it and run like
 
