@@ -48,9 +48,11 @@ public interface CLIParameterHandler {
     /**
      * Method to call for each instance of command line key
      *
+     * @param argument
+     * @throws com.github.sviperll.cli.CLIParameterFormatException
      * @see CLIParameterHandler
      */
-    void handleCLIParameter(String param) throws CLIParameterFormatException;
+    void handleCLIParameter(String argument) throws CLIParameterFormatException;
 
     /**
      * Method returns a default value for the handler.

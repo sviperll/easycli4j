@@ -92,33 +92,7 @@ public class CLIHandlers {
      * @return instance of a handler
      */
     public static CLIParameterHandler integerPoint2D(final Property<Point2D> property) {
-        return new CLIParameterHandler() {
-            @Override
-            public void handleCLIParameter(String param) throws CLIParameterFormatException {
-                String[] fields = param.split("x", -1);
-                if (fields.length != 2)
-                    throw new CLIParameterFormatException("Size should be <width>x<height>, like 300x150: " + param);
-                int width;
-                try {
-                    width = Integer.parseInt(fields[0]);
-                } catch (NumberFormatException ex) {
-                    throw new CLIParameterFormatException("Width is not integer number: " + fields[0], ex);
-                }
-                int height;
-                try {
-                    height = Integer.parseInt(fields[1]);
-                } catch (NumberFormatException ex) {
-                    throw new CLIParameterFormatException("Height is not integer number: " + fields[1], ex);
-                }
-                property.set(new Point(width, height));
-            }
-
-            @Override
-            public String getDefaultValue() {
-                Point2D point = property.get();
-                return point == null ? null : Math.round(point.getX()) + "x" + Math.round(point.getY());
-            }
-        };
+        return new IntegerPoint2DParameterHandler(property);
     }
 
     /**
@@ -217,5 +191,40 @@ public class CLIHandlers {
     }
 
     private CLIHandlers() {
+    }
+
+    private static class IntegerPoint2DParameterHandler implements CLIParameterHandler {
+
+        private final Property<Point2D> property;
+
+        IntegerPoint2DParameterHandler(Property<Point2D> property) {
+            this.property = property;
+        }
+
+        @Override
+        public void handleCLIParameter(String param) throws CLIParameterFormatException {
+            String[] fields = param.split("x", -1);
+            if (fields.length != 2)
+                throw new CLIParameterFormatException("Size should be <width>x<height>, like 300x150: " + param);
+            int width;
+            try {
+                width = Integer.parseInt(fields[0]);
+            } catch (NumberFormatException ex) {
+                throw new CLIParameterFormatException("Width is not integer number: " + fields[0], ex);
+            }
+            int height;
+            try {
+                height = Integer.parseInt(fields[1]);
+            } catch (NumberFormatException ex) {
+                throw new CLIParameterFormatException("Height is not integer number: " + fields[1], ex);
+            }
+            property.set(new Point(width, height));
+        }
+
+        @Override
+        public String getDefaultValue() {
+            Point2D point = property.get();
+            return point == null ? null : Math.round(point.getX()) + "x" + Math.round(point.getY());
+        }
     }
 }

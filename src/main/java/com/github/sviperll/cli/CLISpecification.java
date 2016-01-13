@@ -27,6 +27,7 @@
 package com.github.sviperll.cli;
 
 import java.io.IOException;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -306,24 +307,21 @@ public class CLISpecification {
             char[] c = parser.current().toCharArray();
             Map.Entry<Character, CLIParameterHandler> handler = null;
             for (int i = 1; i < c.length; i++) {
-                boolean found = false;
-                for (Map.Entry<Character, CLIFlagHandler> e: shortFlagHandlers.entrySet()) {
-                    if (e.getKey().equals(c[i])) {
-                        e.getValue().handleCLIFlag();
-                        found = true;
-                    }
-                }
-                for (Map.Entry<Character, CLIParameterHandler> e: shortParameterHandlers.entrySet()) {
-                    if (e.getKey().equals(c[i])) {
+                CLIFlagHandler flagHandler = shortFlagHandlers.get(c[i]);
+                if (flagHandler != null)
+                    flagHandler.handleCLIFlag();
+                else {
+                    CLIParameterHandler newHandler = shortParameterHandlers.get(c[i]);
+                    if (newHandler == null) {
+                        throw new CLIException("Unknown option -" + c[i]);
+                    } else {
                         if (handler != null)
                             throw new CLIException("Expecting parameter for -" + handler.getKey());
-                        else
-                            handler = e;
-                        found = true;
+                        else {
+                            handler = new SimpleEntry<Character, CLIParameterHandler>(c[i], newHandler);
+                        }
                     }
                 }
-                if (!found)
-                    throw new CLIException("Unknown option -" + c[i]);
             }
             if (handler != null) {
                 parser.next();
@@ -341,7 +339,7 @@ public class CLISpecification {
         private final String[] args;
         private int i;
 
-        public Parser(String[] args) {
+        Parser(String[] args) {
             this.args = args;
             i = 0;
         }
